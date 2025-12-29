@@ -20,10 +20,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 def get_password_hash(password: str) -> str:
-    # Ensure password is not longer than 72 characters
-    if len(password) > 72:
-        raise ValueError("Password cannot be longer than 72 characters.")
-    return pwd_context.hash(password)
+    # Truncate the password to 72 characters to comply with bcrypt limitations
+    truncated_password = password[:72]
+    return pwd_context.hash(truncated_password)
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
