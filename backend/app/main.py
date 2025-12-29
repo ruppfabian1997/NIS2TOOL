@@ -22,15 +22,14 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    app.include_router(auth.router, prefix="/auth", tags=["auth"])
-    app.include_router(domains.router, prefix="/domains", tags=["domains"])
-    app.include_router(assessment.router, prefix="/assessment", tags=["assessment"])
-    app.include_router(scores.router, prefix="/scores", tags=["scores"])
-    app.include_router(tasks.router, prefix="/tasks", tags=["tasks"])
-    tags=["tasks"],
-    dependencies=[Depends(get_db), Depends(get_current_user)],
+    allow_headers=["*"],  # Added this for completeness
 )
 
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(domains.router, prefix="/domains", tags=["domains"])
+app.include_router(assessment.router, prefix="/assessment", tags=["assessment"])
+app.include_router(scores.router, prefix="/scores", tags=["scores"])
+app.include_router(tasks.router, prefix="/tasks", tags=["tasks"])
 
 @app.get("/health")
 async def health():
