@@ -1,0 +1,87 @@
+from datetime import datetime
+from typing import List, Optional
+from pydantic import BaseModel, EmailStr, Field
+
+
+class Question(BaseModel):
+    id: str
+    text: str
+    type: str
+
+
+class Measure(BaseModel):
+    id: str
+    title: str
+    priority: str = "medium"
+
+
+class Domain(BaseModel):
+    id: str
+    title: str
+    questions: List[Question]
+    measures: List[Measure]
+
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=6)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class TokenData(BaseModel):
+    user_id: Optional[int] = None
+    email: Optional[EmailStr] = None
+
+
+class AnswerCreate(BaseModel):
+    domain_id: str
+    question_id: str
+    value: int
+
+
+class AnswerResponse(BaseModel):
+    id: int
+    domain_id: str
+    question_id: str
+    value: int
+
+    class Config:
+        orm_mode = True
+
+
+class DomainScore(BaseModel):
+    domain_id: str
+    score_percent: float
+
+
+class OverallScore(BaseModel):
+    score_percent: float
+
+
+class TaskCreate(BaseModel):
+    domain_id: str
+    measure_id: str
+    title: str
+    priority: str = "medium"
+    status: str = "backlog"
+
+
+class TaskResponse(BaseModel):
+    id: int
+    domain_id: str
+    measure_id: str
+    title: str
+    priority: str
+    status: str
+
+    class Config:
+        orm_mode = True
+
+
+class TaskUpdate(BaseModel):
+    priority: Optional[str]
+    status: Optional[str]

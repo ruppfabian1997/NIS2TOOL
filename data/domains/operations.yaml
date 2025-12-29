@@ -1,0 +1,19 @@
+id: operations
+title: Betrieb & Technik
+questions:
+  - id: ops-q1
+    text: "Werden sicherheitsrelevante Patches zeitnah eingespielt?"
+    type: scale
+  - id: ops-q2
+    text: "Existiert ein Backup- und Wiederherstellungskonzept?"
+    type: boolean
+  - id: ops-q3
+    text: "Werden Backups regelmäßig getestet?"
+    type: scale
+measures:
+  - id: ops-m1
+    title: "Patch-Management-Prozess definieren"
+    priority: high
+  - id: ops-m2
+    title: "Backup- und Recovery-Konzept dokumentieren"
+    priority: medium

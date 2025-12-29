@@ -1,0 +1,19 @@
+id: governance
+title: Governance & Organization
+questions:
+  - id: gov-q1
+    text: "Existiert eine Informationssicherheitsleitlinie, die von der Geschäftsführung genehmigt wurde?"
+    type: scale
+  - id: gov-q2
+    text: "Wird die Leitlinie mindestens jährlich überprüft?"
+    type: boolean
+  - id: gov-q3
+    text: "Sind Rollen und Verantwortlichkeiten für ISMS klar definiert?"
+    type: scale
+measures:
+  - id: gov-m1
+    title: "Informationssicherheitsleitlinie erstellen und veröffentlichen"
+    priority: high
+  - id: gov-m2
+    title: "Rollen und Verantwortlichkeiten für ISMS festlegen"
+    priority: medium
