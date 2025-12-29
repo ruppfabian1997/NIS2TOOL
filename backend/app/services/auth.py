@@ -20,6 +20,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 def get_password_hash(password: str) -> str:
+    # Ensure password is not longer than 72 characters
+    if len(password) > 72:
+        raise ValueError("Password cannot be longer than 72 characters.")
     return pwd_context.hash(password)
 
 

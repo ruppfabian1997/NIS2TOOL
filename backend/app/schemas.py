@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, validator
 
 
 class Question(BaseModel):
@@ -24,7 +24,13 @@ class Domain(BaseModel):
 
 class UserCreate(BaseModel):
     email: EmailStr
-    password: str = Field(min_length=6)
+    password: str = Field(..., min_length=6, max_length=72)  # Maximal 72 Zeichen
+
+    @validator("password")
+    def validate_password(cls, value):
+        if len(value) > 72:
+            raise ValueError("Password cannot exceed 72 characters.")
+        return value
 
 
 class Token(BaseModel):
